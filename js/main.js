@@ -6,7 +6,6 @@ function init() {
 
   for(let i = 0; i < 64; i++) {
     const node = document.createElement("div");
-    // node.innerText = i;
     node.classList.add('cell');
     node.setAttribute('custom-id', i);
     board.onclick = clickFunc;
@@ -27,6 +26,7 @@ function init() {
 
   boardNotes = document.querySelectorAll('.cell');
 
+  // console.dir(boardNotes[27]);
 
 }
 
