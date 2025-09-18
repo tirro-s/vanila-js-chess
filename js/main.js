@@ -9,7 +9,7 @@ function init() {
     // node.innerText = i;
     node.classList.add('cell');
     node.setAttribute('custom-id', i);
-    node.onclick = clickFunc;
+    board.onclick = clickFunc;
 
     if (i === 28) {
       const image = document.createElement('img');
