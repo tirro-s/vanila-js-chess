@@ -1,0 +1,26 @@
+
+.wrapper {
+  max-width: 768px;
+  margin: 0 auto;;
+}
+
+.board {
+  padding: 24px;
+  display: inline-grid;
+  margin: 0 auto;
+  grid-template-columns: repeat(8, 1fr);;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.cell {
+  width: 78px;
+  height: 78px;
+  border: 1px solid rgb(44, 44, 44);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.black-cell {
+  background-color: rgb(100, 96, 96);
+}
