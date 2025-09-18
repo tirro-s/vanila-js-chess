@@ -4,8 +4,6 @@ let activeItem;
 function init() {
   const board = document.querySelector('#board');
 
-  let savedNode;
-
   for(let i = 0; i < 64; i++) {
     const node = document.createElement("div");
     // node.innerText = i;
@@ -14,7 +12,9 @@ function init() {
     node.onclick = clickFunc;
 
     if (i === 28) {
-      savedNode = node;
+      const image = document.createElement('img');
+      image.setAttribute('src', 'images/piaces/knight.png');
+      node.appendChild(image);
     }
 
     const row = Math.floor(i / 8);
@@ -27,9 +27,6 @@ function init() {
 
   boardNotes = document.querySelectorAll('.cell');
 
-  const image = document.createElement('img');
-  image.setAttribute('src', 'images/piaces/knight.png');
-  savedNode.appendChild(image);
 
 }
 
