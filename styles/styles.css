@@ -21,6 +21,14 @@
   justify-content: center;
 }
 
+.cell img {
+  max-width: 100%;
+}
+
 .black-cell {
   background-color: rgb(100, 96, 96);
+}
+
+.active {
+  border-color: rgb(255, 137, 137);
 }
