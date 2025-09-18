@@ -1,17 +1,3 @@
-function testFunc() {
-  console.log('form func');
-}
-
-function isEven(value) {
-  const result = value % 2 === 0;
-  // console.log(`Я отримав ${value}, я віддаю ${result}`);
-  return result;
-}
-
-function isOdd(value) {
-  return value % 2 === 1;
-}
-
 function init() {
   const board = document.querySelector('#board');
 
