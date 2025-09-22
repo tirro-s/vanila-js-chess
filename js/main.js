@@ -16,7 +16,6 @@ function init() {
     const piece = board[i];
     if (piece) {
       const image = createPiece(piece);
-      piece.node = image;
       node.appendChild(image);
     }
 
@@ -61,7 +60,8 @@ function initBoard() {
 function handleBoardClick(event) {
   const cell = {
     id: event.target.nodeName === 'IMG' ? event.target.parentNode.getAttribute('cell-id') : event.target.getAttribute('cell-id'),
-    node: event.target.nodeName === 'IMG' ? event.target.parentNode : event.target
+    node: event.target.nodeName === 'IMG' ? event.target.parentNode : event.target,
+    element: event.target
   }  
   if (!cell.id) {
     return;
@@ -91,7 +91,7 @@ function movePice(cell) {
     return;
   }
   board[cell.id] = activeItem.piece;
-  cell.node.appendChild(activeItem.piece.node);
+  cell.node.appendChild(activeItem.cell.element);
   board[activeItem.cell.id] = null;
   activeItem = null;
 }
