@@ -1,52 +1,98 @@
 let activeItem;
+const board = [];
 
 function init() {
-  const board = document.querySelector('#board');
-  board.onclick = handleBoardClick;
+  const boardRef = document.querySelector('#board');
+  boardRef.onclick = handleBoardClick;
+
+  initBoard();
   
   for(let i = 0; i < 64; i++) {
     const node = document.createElement("div");
     node.classList.add('cell');
+    node.setAttribute('cell-id', i);
 
-    if (i === 28) {
-      const image = document.createElement('img');
-      // image.setAttribute('src', 'images/piaces/knight.png');
-      image.src = 'images/piaces/knight.png';
+
+    const piece = board[i];
+    if (piece) {
+      const image = createPiece(piece);
+      piece.node = image;
       node.appendChild(image);
     }
 
     const row = Math.floor(i / 8);
-    
     if (isEven(i) && isOdd(row) || isOdd(i) && isEven(row)) {
       node.classList.add('black-cell');
     }
-    board.appendChild(node);
+
+    boardRef.appendChild(node);
   }
 
+  console.log(board);
+
+}
+
+function createPiece(piece) {
+  const black = piece.alliance === 'black'  ? 'b' : '';
+  const image = document.createElement('img');
+  image.src = `images/piaces/${piece.name}${black}.png`;
+  return image;
+}
+
+function initBoard() {
+  board[0] = {
+    name: 'rook',
+    alliance: 'black'
+  };
+  board[1] = {
+    name: 'knight',
+    alliance: 'black'
+  };
+  board[2] = {
+    name: 'bishop',
+    alliance: 'black'
+  };
+  board[57] = {
+    name: 'knight',
+    alliance: 'white'
+  };
 }
 
 function handleBoardClick(event) {
+  const cell = {
+    id: event.target.nodeName === 'IMG' ? event.target.parentNode.getAttribute('cell-id') : event.target.getAttribute('cell-id'),
+    node: event.target.nodeName === 'IMG' ? event.target.parentNode : event.target
+  }  
+  if (!cell.id) {
+    return;
+  }
   if (activeItem) {
-    movePice(event.target);
+    movePice(cell);
   } else {
-    selectPiece(event.target);
+    selectPiece(cell);
   }
 }
 
-function selectPiece(element) {
-  if (element.nodeName === 'IMG') {
+function selectPiece(cell) {
+  const piece = board[cell.id];
+  if (piece) {
+    cell.node.classList.add('active');
     activeItem = {
-      item: element,
-      parent: element.parentNode,
+      cell: cell,
+      piece: piece
     }
-    console.log(activeItem);
-    element.parentNode.classList.add('active');
   }
 }
 
-function movePice(element) {
-  activeItem.parent.classList.remove('active');
-  element.appendChild(activeItem.item);
+function movePice(cell) {
+  activeItem.cell.node.classList.remove('active');
+  if (board[cell.id]) {
+    activeItem = null;
+    return;
+  }
+  board[cell.id] = activeItem.piece;
+  cell.node.appendChild(activeItem.piece.node);
+  board[activeItem.cell.id] = null;
   activeItem = null;
 }
 
