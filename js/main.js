@@ -1,5 +1,12 @@
 let activeItem;
 const board = [];
+// const kastyan = {
+//   firstName: "Kostya",
+//   lastName: "Duda",
+//   thirdName: "Andriyovich"
+// }
+// const message = `Моє ім'я ${kastyan.firstName}, моя фамілія ${kastyan.lastName}`
+// console.log(message);
 
 function init() {
   const boardNode = document.querySelector('#board');
@@ -43,16 +50,39 @@ function initBoard() {
     name: 'bishop',
     alliance: 'black'
   }
+
+  board[3] = { 
+    name: 'queen', 
+    alliance: 'black' 
+  };
+board[4] = {
+      name: 'king', 
+    alliance: 'black'
+}
+  board[5] = {
+    name: 'bishop',
+    alliance: 'black'
+  }
   board[6] = { 
     name: 'knight', 
     alliance: 'black' 
   };
+
+    board[7] = {
+    name: 'rook',
+    alliance: 'black'
+  }
 
   for(let i = 8; i < 16; i++) {
     board[i] = { 
       name: 'pawn', 
       alliance: 'black' 
     }
+  }
+
+    board[56] = {
+    name: 'rook',
+    alliance: 'white'
   }
 
   board[57] = {
@@ -63,7 +93,43 @@ function initBoard() {
     name: 'bishop',
     alliance: 'white'
   }
+  board[59] = {
+    name: 'queen',
+    alliance: 'white'
+  }
+  
+  board[60] = {
+    name: 'king',
+    alliance: 'white'
+  }
+
+  
+  board[61] = {
+    name: 'bishop',
+    alliance: 'white'
+  }
+
+
+  board[62] = {
+    name: 'knight',
+    alliance: 'white'
+  }
+
+   board[63] = {
+    name: 'rook',
+    alliance: 'white'
+  }
+
+  for(let i = 48; i <=55 ; i++) {
+   board[i] = {
+    name: 'pawn',
+    alliance: 'white'
+   }
+   
+  }
 }
+
+
 
 function handleBoardClick(event) {
   console.log(activeItem);
