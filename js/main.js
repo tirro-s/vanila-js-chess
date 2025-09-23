@@ -26,6 +26,7 @@ function init() {
 }
 
 function handleBoardClick(event) {
+  console.log(activeItem);
   if (activeItem) {
     movePice(event.target);
   } else {
