@@ -1,28 +1,68 @@
 let activeItem;
+const board = [];
 
 function init() {
-  const board = document.querySelector('#board');
-  board.onclick = handleBoardClick;
+  const boardNode = document.querySelector('#board');
+  boardNode.onclick = handleBoardClick;
+
+  initBoard();
+  console.log(board);
   
   for(let i = 0; i < 64; i++) {
     const node = document.createElement("div");
     node.classList.add('cell');
 
-    if (i === 28) {
+    const piece = board[i]; // {name: 'rook', alliance: 'black'} // null undefined
+    if (piece) {
+      const black = piece.alliance === 'white' ? '' : 'b';
       const image = document.createElement('img');
-      // image.setAttribute('src', 'images/piaces/knight.png');
-      image.src = 'images/piaces/knight.png';
+      image.src = `images/piaces/${piece.name}${black}.png`;
       node.appendChild(image);
     }
 
     const row = Math.floor(i / 8);
-    
     if (isEven(i) && isOdd(row) || isOdd(i) && isEven(row)) {
       node.classList.add('black-cell');
     }
-    board.appendChild(node);
+
+    boardNode.appendChild(node);
   }
 
+}
+
+function initBoard() {
+  board[0] = {
+    name: 'rook',
+    alliance: 'black'
+  }
+  board[1] = {
+    name: 'knight',
+    alliance: 'black'
+  }
+  board[2] = {
+    name: 'bishop',
+    alliance: 'black'
+  }
+  board[6] = { 
+    name: 'knight', 
+    alliance: 'black' 
+  };
+
+  for(let i = 8; i < 16; i++) {
+    board[i] = { 
+      name: 'pawn', 
+      alliance: 'black' 
+    }
+  }
+
+  board[57] = {
+    name: 'knight',
+    alliance: 'white'
+  }
+  board[58] = {
+    name: 'bishop',
+    alliance: 'white'
+  }
 }
 
 function handleBoardClick(event) {
